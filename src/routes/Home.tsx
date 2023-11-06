@@ -164,8 +164,8 @@ function Home() {
 	});
 
 	const navigate = useNavigate();
-	const bigMovieMatch = routeMatched("/movies/:movieId");
 	const { scrollY } = useScroll();
+	const bigMovieMatch = routeMatched("/movies/:movieId");
 	const overlayClick = () => navigate("/");
 	const clickedMovie =
 		bigMovieMatch?.movieId &&

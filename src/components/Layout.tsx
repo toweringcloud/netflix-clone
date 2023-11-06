@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { motion, useAnimation, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -87,7 +88,7 @@ const Circle = styled(motion.span)`
 	background-color: ${(props) => props.theme.red};
 `;
 
-const Search = styled.span`
+const Search = styled.form`
 	position: relative;
 	color: white;
 	display: flex;
@@ -141,6 +142,15 @@ function Layout() {
 		});
 	}, [scrollY, navAnimation]);
 
+	interface IForm {
+		keyword: string;
+	}
+	const navigate = useNavigate();
+	const { register, handleSubmit } = useForm<IForm>();
+	const onValid = (data: IForm) => {
+		navigate(`/search?keyword=${data.keyword}`);
+	};
+
 	return (
 		<Wrapper>
 			<Nav variants={navVariants} animate={navAnimation} initial={"top"}>
@@ -172,7 +182,7 @@ function Layout() {
 					</Items>
 				</Col>
 				<Col>
-					<Search>
+					<Search onSubmit={handleSubmit(onValid)}>
 						<motion.svg
 							onClick={toggleSearch}
 							animate={{ x: searchOpen ? -220 : 0 }}
@@ -188,6 +198,10 @@ function Layout() {
 							></path>
 						</motion.svg>
 						<Input
+							{...register("keyword", {
+								required: true,
+								minLength: 2,
+							})}
 							animate={inputAnimation}
 							initial={{ scaleX: 0 }}
 							transition={{ type: "linear" }}
