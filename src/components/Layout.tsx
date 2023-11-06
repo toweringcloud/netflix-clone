@@ -6,7 +6,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 200vh;
+	height: 300vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
