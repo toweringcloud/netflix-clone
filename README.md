@@ -1,2 +1,3 @@
 # netflix-clone
-movie and tv show streaming using react hooks &amp; framer motion
+
+movie streaming using react hooks and framer motion
