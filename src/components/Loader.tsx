@@ -1,7 +1,7 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
-	height: 180vh;
+	height: 20vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -11,7 +11,7 @@ const Text = styled.span`
 	font-size: 24px;
 `;
 
-export default function LoadingScreen() {
+export default function Loader() {
 	return (
 		<Wrapper>
 			<Text>Loading...</Text>

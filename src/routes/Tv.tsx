@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-	margin-top: 80px;
-	background-color: skyblue;
-	color: "black";
 	width: 100%;
 	height: 100%;
+	margin-top: 15vh;
+	background-color: black;
+	color: "white";
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
