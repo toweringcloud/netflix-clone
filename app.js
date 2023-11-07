@@ -19,4 +19,8 @@ app.use((_, res) => {
 
 const portNo = process.env.PORT_NO || 3000;
 const svcNm = process.env.SVC_NM || "custom";
-app.listen(portNo, () => console.log(`${svcNm} ui service on port ${portNo}`));
+app.listen(portNo, () =>
+	console.log(
+		`${svcNm} ui preview on following\n➜  Local:   http://localhost:${portNo}`
+	)
+);

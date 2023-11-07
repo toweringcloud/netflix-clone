@@ -163,6 +163,10 @@ const routeMatched = (specificRoute: string) => {
 	return params.length >= 3 ? { contentId: params[params.length - 1] } : null;
 };
 
+// const TEST_MODE = true;
+// const ROOT_PATH = TEST_MODE ? "/netflix-clone/" : "/";
+const ROOT_PATH = process.env.SVC_DIV ? `/${process.env.SVC_DIV}/` : "/";
+
 function Tv() {
 	//-categories: airing_today, on_the_air, popular, top_rated
 	const categories = {
@@ -197,10 +201,10 @@ function Tv() {
 		{ isLoading: loadingTop, data: dataTop },
 	] = useMultiQuery();
 
-	console.log("dataPlaying", dataPlaying);
-	console.log("dataUpcoming", dataUpcoming);
-	console.log("dataPopular", dataPopular);
-	console.log("dataTop", dataTop);
+	// console.log("dataPlaying", dataPlaying);
+	// console.log("dataUpcoming", dataUpcoming);
+	// console.log("dataPopular", dataPopular);
+	// console.log("dataTop", dataTop);
 
 	const offset = 6;
 
@@ -263,9 +267,9 @@ function Tv() {
 	const navigate = useNavigate();
 	const { scrollY } = useScroll();
 	const bigContentMatch = routeMatched("/tvshows/:tvShowId");
-	const overlayClick = () => navigate("/tv");
+	const overlayClick = () => navigate(`${ROOT_PATH}tv`);
 	const onBoxClicked = (contentId: number) => {
-		navigate(`/tvshows/${contentId}`);
+		navigate(`${ROOT_PATH}tvshows/${contentId}`);
 	};
 	const clickedContent =
 		bigContentMatch?.contentId &&

@@ -16,9 +16,11 @@ const Wrapper = styled.div`
 	align-items: center;
 `;
 
+const ROOT_PATH = process.env.SVC_DIV ? `/${process.env.SVC_DIV}/` : "/";
+
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: ROOT_PATH,
 		element: (
 			<ProtectedRoute>
 				<Layout />
