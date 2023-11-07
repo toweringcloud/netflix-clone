@@ -1,6 +1,6 @@
 # netflix-clone
 
-## movie and tvshow platform using themoviedb and framer motion
+## movie and tvshow guide using themoviedb and framer motion
 
 -   background banner : show content retrieved at first as background cover
 -   movie list : show now playing, upcoming, popular and top rated movies
