@@ -3,7 +3,7 @@
 	"description": "movie streaming using react and framer motion",
 	"license": "MIT",
 	"author": "toweringcloud",
-	"homepage": "https://github.com/toweringcloud/netflix-clone",
+	"homepage": "https://toweringcloud.github.io/netflix-clone",
 	"inspiredby": "https://nomadcoders.co/react-masterclass",
 	"keywords": [
 		"typescript",
@@ -51,6 +51,6 @@
 		"express": "^4.18.2",
 		"morgan": "^1.10.0",
 		"typescript": "^5.0.2",
-		"vite": "^4.4.11"
+		"vite": "^4.5.0"
 	}
 }

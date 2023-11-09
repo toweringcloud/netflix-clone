@@ -16,40 +16,43 @@ const Wrapper = styled.div`
 	align-items: center;
 `;
 
-const ROOT_PATH = process.env.SVC_DIV ? `/${process.env.SVC_DIV}/` : "/";
+const projectName = import.meta.env.VITE_BASE_NAME;
 
-const router = createBrowserRouter([
-	{
-		path: ROOT_PATH,
-		element: (
-			<ProtectedRoute>
-				<Layout />
-			</ProtectedRoute>
-		),
-		children: [
-			{
-				path: "",
-				element: <Home />,
-			},
-			{
-				path: "movies/:contentId",
-				element: <Home />,
-			},
-			{
-				path: "tv",
-				element: <Tv />,
-			},
-			{
-				path: "tvshows/:contentId",
-				element: <Tv />,
-			},
-			{
-				path: "search",
-				element: <Search />,
-			},
-		],
-	},
-]);
+const router = createBrowserRouter(
+	[
+		{
+			path: "/",
+			element: (
+				<ProtectedRoute>
+					<Layout />
+				</ProtectedRoute>
+			),
+			children: [
+				{
+					path: "",
+					element: <Home />,
+				},
+				{
+					path: "movies/:contentId",
+					element: <Home />,
+				},
+				{
+					path: "tv",
+					element: <Tv />,
+				},
+				{
+					path: "tvshows/:contentId",
+					element: <Tv />,
+				},
+				{
+					path: "search",
+					element: <Search />,
+				},
+			],
+		},
+	],
+	{ basename: projectName }
+);
 
 function App() {
 	return (

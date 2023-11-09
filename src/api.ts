@@ -1,5 +1,5 @@
-const API_KEY = "{your_credential}";
-const BASE_PATH = "https://api.themoviedb.org/3";
+const API_KEY = import.meta.env.VITE_API_KEY;
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface IMovie {
 	id: number;
@@ -24,7 +24,7 @@ export interface IGetMoviesResult {
 
 //-category: now_playing, upcoming, popular, top_rated
 export function getMovies(category: string) {
-	return fetch(`${BASE_PATH}/movie/${category}?api_key=${API_KEY}`).then(
+	return fetch(`${API_URL}/movie/${category}?api_key=${API_KEY}`).then(
 		(response) => response.json()
 	);
 }
@@ -52,14 +52,14 @@ export interface IGetTvShowsResult {
 
 //-category: airing_today, on_the_air, popular, top_rated
 export function getTvShows(category: string) {
-	return fetch(`${BASE_PATH}/tv/${category}?api_key=${API_KEY}`).then(
+	return fetch(`${API_URL}/tv/${category}?api_key=${API_KEY}`).then(
 		(response) => response.json()
 	);
 }
 
 //-division: movie, tv
-export function search(division: string, keyword: string) {
+export function searchContents(division: string, keyword: string) {
 	return fetch(
-		`${BASE_PATH}/search/${division}?api_key=${API_KEY}&query=${keyword}`
+		`${API_URL}/search/${division}?api_key=${API_KEY}&query=${keyword}`
 	).then((response) => response.json());
 }

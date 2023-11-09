@@ -163,10 +163,6 @@ const routeMatched = (specificRoute: string) => {
 	return params.length >= 3 ? { contentId: params[params.length - 1] } : null;
 };
 
-// const TEST_MODE = true;
-// const ROOT_PATH = TEST_MODE ? "/netflix-clone/" : "/";
-const ROOT_PATH = process.env.SVC_DIV ? `/${process.env.SVC_DIV}/` : "/";
-
 function Tv() {
 	//-categories: airing_today, on_the_air, popular, top_rated
 	const categories = {
@@ -267,9 +263,9 @@ function Tv() {
 	const navigate = useNavigate();
 	const { scrollY } = useScroll();
 	const bigContentMatch = routeMatched("/tvshows/:tvShowId");
-	const overlayClick = () => navigate(`${ROOT_PATH}tv`);
+	const overlayClick = () => navigate("/tv");
 	const onBoxClicked = (contentId: number) => {
-		navigate(`${ROOT_PATH}tvshows/${contentId}`);
+		navigate(`/tvshows/${contentId}`);
 	};
 	const clickedContent =
 		bigContentMatch?.contentId &&

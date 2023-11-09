@@ -115,13 +115,9 @@ const routeMatched = (specificRoute: string) => {
 	return specificRoute === location.pathname;
 };
 
-// const TEST_MODE = true;
-// const ROOT_PATH = TEST_MODE ? "/netflix-clone/" : "/";
-const ROOT_PATH = process.env.SVC_DIV ? `/${process.env.SVC_DIV}/` : "/";
-
 function Layout() {
-	const homeMatch = routeMatched(ROOT_PATH);
-	const tvMatch = routeMatched(`${ROOT_PATH}tv`);
+	const homeMatch = routeMatched("/");
+	const tvMatch = routeMatched("/tv");
 
 	const [searchOpen, setSearchOpen] = useState(false);
 	const inputAnimation = useAnimation();
@@ -152,7 +148,7 @@ function Layout() {
 	const navigate = useNavigate();
 	const { register, handleSubmit } = useForm<IForm>();
 	const onValid = (data: IForm) => {
-		navigate(`${ROOT_PATH}search?keyword=${data.keyword}`);
+		navigate(`/search?keyword=${data.keyword}`);
 	};
 
 	return (
@@ -172,13 +168,13 @@ function Layout() {
 					</Logo>
 					<Items>
 						<Item>
-							<Link to={ROOT_PATH}>
+							<Link to="/">
 								Home
 								{homeMatch && <Circle layoutId="circle" />}
 							</Link>
 						</Item>
 						<Item>
-							<Link to={`${ROOT_PATH}tv`}>
+							<Link to={"/tv"}>
 								TV Shows
 								{tvMatch && <Circle layoutId="circle" />}
 							</Link>
