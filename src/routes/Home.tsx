@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -291,6 +292,10 @@ function Home() {
 				<Loader />
 			) : (
 				<>
+					<Helmet>
+						<meta charSet="utf-8" />
+						<title>Netflix Clone</title>
+					</Helmet>
 					<Banner
 						bgphoto={makeImagePath(
 							dataPlaying?.results[0].backdrop_path || ""
