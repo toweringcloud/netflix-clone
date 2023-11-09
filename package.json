@@ -9,10 +9,10 @@
 		"typescript",
 		"react",
 		"motion",
-		"netflix",
+		"themoviedb",
 		"movie",
 		"tvshow",
-		"streaming"
+		"preview"
 	],
 	"type": "module",
 	"scripts": {
