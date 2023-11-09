@@ -1,11 +1,11 @@
 # netflix-clone
 
-## movie and tvshow guide using themoviedb and framer motion
+## movie and tvshow preview using themoviedb
 
--   background banner : show content retrieved at first as background cover
+-   background banner : show first content as background cover
 -   movie list : show now playing, upcoming, popular and top rated movies
 -   tvshow list : show airing today, on the air, popular and top rated tvshows
--   keyword search : find movies or tvshows matching specific keyword input
+-   keyword search : find movies or tvshows matching specific keyword
 
 [home page]
 ![Alt text](https://github.com/toweringcloud/netflix-clone/blob/main/demo/snapshot1.png?raw=true)
