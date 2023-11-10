@@ -1,6 +1,6 @@
 # netflix-clone
 
-## movie and tvshow preview using themoviedb
+## movie and tvshow preview using react & themoviedb
 
 -   background banner : show first content as background cover
 -   movie list : show now playing, upcoming, popular and top rated movies
