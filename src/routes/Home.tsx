@@ -46,6 +46,10 @@ const Category = styled.span<{ top: number }>`
 	top: ${(props) => props.top + "px"};
 	font-size: 36px;
 	color: white;
+	cursor: pointer;
+	&:hover {
+		color: yellow;
+	}
 `;
 const Slider = styled.div<{ top: number }>`
 	position: relative;
@@ -551,10 +555,24 @@ function Home() {
 											</BigOverview>
 											{!loading && content ? (
 												<BigDetail>
-													<p>
-														# Tag Line :{" "}
-														{content.tagline}
-													</p>
+													{content.tagline ||
+													content.homepage ? (
+														content.tagline ? (
+															<p>
+																# Tag Line :{" "}
+																{
+																	content.tagline
+																}
+															</p>
+														) : (
+															<p>
+																# Homepage :{" "}
+																{
+																	content.homepage
+																}
+															</p>
+														)
+													) : null}
 													<p>
 														# Genres :{" "}
 														{content.genres
