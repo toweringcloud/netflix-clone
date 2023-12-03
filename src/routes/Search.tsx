@@ -5,32 +5,62 @@ import { useQuery } from "@tanstack/react-query";
 
 import Loader from "../components/Loader";
 import { searchContents, IGetMoviesResult, IGetTvShowsResult } from "../api";
-// import { makeImagePath } from "../utils";
+import { makeImagePath } from "../utils";
 
 const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
-	margin-top: 15vh;
+	margin-top: 110vh;
 	background-color: black;
 	color: "white";
 
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	grid-auto-rows: 30vh;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 100%;
+	gap: 20px;
 `;
 
-// const Box = styled.div<{ bgphoto: string }>`
-// 	background-color: white;
-// 	background-image: url(${(props) => props.bgphoto});
-// 	background-size: cover;
-// 	background-position: center center;
-// 	height: 200px;
-// 	font-size: 66px;
-// `;
+const Section = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	gap: 10px;
+`;
 
-// const TEST_MODE = true;
-// const ROOT_PATH = TEST_MODE ? "/netflix-clone/" : "/";
-// const ROOT_PATH = process.env.SVC_DIV ? `/${process.env.SVC_DIV}/` : "/";
+const Title = styled.div`
+	font-size: 25px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const Contents = styled.div`
+	display: grid;
+	grid-template-columns: repeat(2, minmax(23.5vw, 1fr));
+	grid-auto-rows: 22vh;
+	gap: 5px;
+`;
+
+const NoData = styled.div`
+	color: gray;
+	font-size: 25px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const Box = styled.div<{ bgphoto: string }>`
+	background-color: white;
+	background-image: url(${(props) => props.bgphoto});
+	background-size: cover;
+	background-position: center center;
+	height: 200px;
+	font-size: 20px;
+	cursor: pointer;
+`;
 
 function Search() {
 	const location = useLocation();
@@ -51,23 +81,58 @@ function Search() {
 			queryFn: () => searchContents("tv", keyword),
 		});
 
-	console.log("dataMovies", dataMovies);
-	console.log("dataTvShows", dataTvShows);
+	// console.log("dataMovies", dataMovies);
+	// console.log("dataTvShows", dataTvShows);
 
 	return (
 		<Wrapper>
-			{loadingMovies || loadingTvShows ? (
+			{loadingMovies ? (
 				<Loader />
+			) : dataMovies && dataMovies.results.length > 0 ? (
+				<Section>
+					<Title>Movies</Title>
+					<Contents>
+						{dataMovies?.results.map((content) => (
+							<Box
+								bgphoto={makeImagePath(
+									content.poster_path,
+									"w300"
+								)}
+							>
+								{content.title}
+							</Box>
+						))}
+					</Contents>
+				</Section>
 			) : (
-				<h1>
-					Movie Search Result:\n{JSON.stringify(dataMovies?.results)}
-				</h1>
-				// {dataMovies && dataMovies?.results.map((content) => (
-				//  	<Box bgphoto={makeImagePath(
-				//  		content.backdrop_path,
-				//  		"w500"
-				//  	)}>{content.title}</Box>)
-				// }
+				<Section>
+					<Title>Movies</Title>
+					<NoData>No Contents Available</NoData>
+				</Section>
+			)}
+			{loadingTvShows ? (
+				<Loader />
+			) : dataTvShows && dataTvShows.results.length > 0 ? (
+				<Section>
+					<Title>TV Shows</Title>
+					<Contents>
+						{dataTvShows?.results.map((content) => (
+							<Box
+								bgphoto={makeImagePath(
+									content.poster_path,
+									"w300"
+								)}
+							>
+								{content.name}
+							</Box>
+						))}
+					</Contents>
+				</Section>
+			) : (
+				<Section>
+					<Title>TV Shows</Title>
+					<NoData>No Contents Available</NoData>
+				</Section>
 			)}
 		</Wrapper>
 	);
