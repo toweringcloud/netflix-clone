@@ -32,8 +32,8 @@ const Title = styled.h2`
 	margin-bottom: 20px;
 `;
 const Overview = styled.p`
-	font-size: 30px;
-	width: 50%;
+	font-size: 25px;
+	width: 60%;
 `;
 
 const Category = styled.span<{ top: number }>`
@@ -86,7 +86,7 @@ const boxVariants = {
 	},
 	hover: {
 		scale: 1.3,
-		y: -80,
+		y: -50,
 		transition: {
 			delay: 0.5,
 			duaration: 0.1,
@@ -104,7 +104,7 @@ const Info = styled(motion.div)`
 	bottom: 0;
 	h4 {
 		text-align: center;
-		font-size: 18px;
+		font-size: 14px;
 	}
 `;
 const infoVariants = {
@@ -128,8 +128,8 @@ const Overlay = styled(motion.div)`
 `;
 const BigMovie = styled(motion.div)`
 	position: absolute;
-	width: 40vw;
-	height: 80vh;
+	width: 50vw;
+	height: 75vh;
 	left: 0;
 	right: 0;
 	margin: 0 auto;
@@ -144,16 +144,16 @@ const BigCover = styled.div`
 	height: 400px;
 `;
 const BigTitle = styled.h3`
+	position: relative;
+	top: -90px;
 	color: ${(props) => props.theme.white.lighter};
 	padding: 20px;
-	font-size: 46px;
-	position: relative;
-	top: -80px;
+	font-size: 30px;
 `;
 const BigOverview = styled.p`
 	padding: 20px;
 	position: relative;
-	top: -80px;
+	top: -90px;
 	color: ${(props) => props.theme.white.lighter};
 `;
 
@@ -410,7 +410,7 @@ function Home() {
 								animate="visible"
 								exit="exit"
 								transition={{ type: "tween", duration: 1 }}
-								key={indexC + 100}
+								key={indexC + 200}
 							>
 								{dataPopular?.results
 									.slice(1)
@@ -456,7 +456,7 @@ function Home() {
 								animate="visible"
 								exit="exit"
 								transition={{ type: "tween", duration: 1 }}
-								key={indexD + 100}
+								key={indexD + 300}
 							>
 								{dataTop?.results
 									.slice(1)
