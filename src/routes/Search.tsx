@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -65,23 +64,23 @@ const Box = styled.div<{ bgphoto: string }>`
 function Search() {
 	const location = useLocation();
 	const keyword = new URLSearchParams(location.search).get("keyword");
-	console.log(keyword);
-
 	if (!keyword) {
 		return [null, null];
 	}
+	// console.log(keyword);
+
 	const { isLoading: loadingMovies, data: dataMovies } =
 		useQuery<IGetMoviesResult>({
 			queryKey: ["movies", keyword],
 			queryFn: () => searchContents("movie", keyword),
 		});
+	// console.log("dataMovies", dataMovies);
+
 	const { isLoading: loadingTvShows, data: dataTvShows } =
 		useQuery<IGetTvShowsResult>({
 			queryKey: ["tvshows", keyword],
 			queryFn: () => searchContents("tv", keyword),
 		});
-
-	// console.log("dataMovies", dataMovies);
 	// console.log("dataTvShows", dataTvShows);
 
 	return (

@@ -6,7 +6,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import Loader from "../components/Loader";
-import { getMovies, IGetMoviesResult } from "../api";
+import {
+	getMovieInfo,
+	getMovies,
+	IGetMoviesResult,
+	IMovieDetail,
+} from "../api";
 import { makeImagePath } from "../utils";
 
 const Wrapper = styled.div`
@@ -128,7 +133,7 @@ const Overlay = styled(motion.div)`
 `;
 const BigMovie = styled(motion.div)`
 	position: absolute;
-	width: 50vw;
+	width: 75vw;
 	height: 75vh;
 	left: 0;
 	right: 0;
@@ -155,6 +160,17 @@ const BigOverview = styled.p`
 	position: relative;
 	top: -90px;
 	color: ${(props) => props.theme.white.lighter};
+`;
+const BigDetail = styled.p`
+	padding: 20px;
+	position: relative;
+	top: -110px;
+	color: ${(props) => props.theme.white.lighter};
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	gap: 5px;
 `;
 
 const routeMatched = (specificRoute: string) => {
@@ -265,9 +281,20 @@ function Home() {
 	const { scrollY } = useScroll();
 	const bigMovieMatch = routeMatched("/movies/:movieId");
 	const overlayClick = () => navigate("/");
+
+	const [loading, setLoading] = useState(true);
+	const [content, setContent] = useState<IMovieDetail>();
+	const getSpecificMovie = async (contentId: number) => {
+		const json = await getMovieInfo(contentId);
+		// console.log(json);
+		setContent(json);
+		setLoading(false);
+	};
 	const onBoxClicked = (contentId: number) => {
 		navigate(`/movies/${contentId}`);
+		getSpecificMovie(contentId);
 	};
+
 	const clickedMovie =
 		bigMovieMatch?.contentId &&
 		(dataPlaying?.results.find(
@@ -516,6 +543,35 @@ function Home() {
 											<BigOverview>
 												{clickedMovie.overview}
 											</BigOverview>
+											{!loading && content ? (
+												<BigDetail>
+													<p>
+														# Tag Line :{" "}
+														{content.tagline}
+													</p>
+													<p>
+														# Genres :{" "}
+														{content.genres
+															.map(
+																(genre) =>
+																	genre.name
+															)
+															.join(", ")}
+													</p>
+													<p>
+														# Release Date :{" "}
+														{content.release_date}
+													</p>
+													<p>
+														# Running Time :{" "}
+														{content.runtime} min
+													</p>
+													<p>
+														# Vote Average :{" "}
+														{content.vote_average}
+													</p>
+												</BigDetail>
+											) : null}
 										</>
 									)}
 								</BigMovie>

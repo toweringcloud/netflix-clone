@@ -5,7 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import Loader from "../components/Loader";
-import { getTvShows, IGetTvShowsResult } from "../api";
+import {
+	getTvShowInfo,
+	getTvShows,
+	IGetTvShowsResult,
+	ITvShowDetail,
+} from "../api";
 import { makeImagePath } from "../utils";
 
 const Wrapper = styled.div`
@@ -125,9 +130,9 @@ const Overlay = styled(motion.div)`
 	background-color: rgba(0, 0, 0, 0.5);
 	opacity: 0;
 `;
-const BigMovie = styled(motion.div)`
+const BigContent = styled(motion.div)`
 	position: absolute;
-	width: 50vw;
+	width: 75vw;
 	height: 75vh;
 	left: 0;
 	right: 0;
@@ -154,6 +159,17 @@ const BigOverview = styled.p`
 	position: relative;
 	top: -90px;
 	color: ${(props) => props.theme.white.lighter};
+`;
+const BigDetail = styled.p`
+	padding: 20px;
+	position: relative;
+	top: -110px;
+	color: ${(props) => props.theme.white.lighter};
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	gap: 5px;
 `;
 
 const routeMatched = (specificRoute: string) => {
@@ -264,9 +280,20 @@ function Tv() {
 	const { scrollY } = useScroll();
 	const bigContentMatch = routeMatched("/tvshows/:tvShowId");
 	const overlayClick = () => navigate("/tv");
+
+	const [loading, setLoading] = useState(true);
+	const [content, setContent] = useState<ITvShowDetail>();
+	const getSpecificContent = async (contentId: number) => {
+		const json = await getTvShowInfo(contentId);
+		console.log(json);
+		setContent(json);
+		setLoading(false);
+	};
 	const onBoxClicked = (contentId: number) => {
 		navigate(`/tvshows/${contentId}`);
+		getSpecificContent(contentId);
 	};
+
 	const clickedContent =
 		bigContentMatch?.contentId &&
 		(dataPlaying?.results.find(
@@ -491,7 +518,7 @@ function Tv() {
 									exit={{ opacity: 0 }}
 									animate={{ opacity: 1 }}
 								/>
-								<BigMovie
+								<BigContent
 									style={{ top: scrollY.get() + 100 }}
 									layoutId={bigContentMatch.contentId}
 								>
@@ -511,9 +538,41 @@ function Tv() {
 											<BigOverview>
 												{clickedContent.overview}
 											</BigOverview>
+											{!loading && content ? (
+												<BigDetail>
+													{content.tagline ? (
+														<p>
+															# Tag Line :{" "}
+															{content.tagline}
+														</p>
+													) : (
+														<p>
+															# Homepage :{" "}
+															{content.homepage}
+														</p>
+													)}
+													<p>
+														# Genres :{" "}
+														{content.genres
+															.map(
+																(genre) =>
+																	genre.name
+															)
+															.join(", ")}
+													</p>
+													<p>
+														# First Air Date :{" "}
+														{content.first_air_date}
+													</p>
+													<p>
+														# Vote Average :{" "}
+														{content.vote_average}
+													</p>
+												</BigDetail>
+											) : null}
 										</>
 									)}
-								</BigMovie>
+								</BigContent>
 							</>
 						) : null}
 					</AnimatePresence>
