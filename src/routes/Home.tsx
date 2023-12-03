@@ -295,7 +295,7 @@ function Home() {
 		getSpecificMovie(contentId);
 	};
 
-	const clickedMovie =
+	const clickedContent =
 		bigMovieMatch?.contentId &&
 		(dataPlaying?.results.find(
 			(movie) => movie.id === +bigMovieMatch.contentId
@@ -527,21 +527,27 @@ function Home() {
 									style={{ top: scrollY.get() + 100 }}
 									layoutId={bigMovieMatch.contentId}
 								>
-									{clickedMovie && (
+									{clickedContent && (
 										<>
 											<BigCover
 												style={{
 													backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-														clickedMovie.backdrop_path,
+														clickedContent.backdrop_path,
 														"w500"
 													)})`,
 												}}
 											/>
 											<BigTitle>
-												{clickedMovie.title}
+												{clickedContent.title}
 											</BigTitle>
 											<BigOverview>
-												{clickedMovie.overview}
+												{clickedContent.overview
+													.length > 500
+													? clickedContent.overview.substring(
+															0,
+															500
+													  ) + "..."
+													: clickedContent.overview}
 											</BigOverview>
 											{!loading && content ? (
 												<BigDetail>

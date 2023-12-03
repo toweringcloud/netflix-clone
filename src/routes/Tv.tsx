@@ -536,7 +536,13 @@ function Tv() {
 												{clickedContent.name}
 											</BigTitle>
 											<BigOverview>
-												{clickedContent.overview}
+												{clickedContent.overview
+													.length > 500
+													? clickedContent.overview.substring(
+															0,
+															500
+													  ) + "..."
+													: clickedContent.overview}
 											</BigOverview>
 											{!loading && content ? (
 												<BigDetail>
