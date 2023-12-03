@@ -18,3 +18,6 @@
 
 [tvshow list per categories]
 ![Alt text](https://github.com/toweringcloud/netflix-clone/blob/main/demo/snapshot4.png?raw=true)
+
+[keyword search on movies and tvshows]
+![Alt text](https://github.com/toweringcloud/netflix-clone/blob/main/demo/snapshot5.png?raw=true)
